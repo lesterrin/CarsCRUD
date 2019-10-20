@@ -1,0 +1,49 @@
+﻿@model CarsCRUD.Models.Car
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>@Localizer["Header"]</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group col-md-6">
+                @*<label asp-for="CarName" class="control-label"></label>*@
+                <label>@Localizer["CarName"]</label>
+                <input asp-for="CarName" class="form-control" />
+                <span asp-validation-for="CarName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group col-md-6">
+                @*<label asp-for="CarDesc" class="control-label"></label>*@
+                <label>@Localizer["CarDesc"]</label>
+                <input asp-for="CarDesc" class="form-control" />
+                <span asp-validation-for="CarDesc" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                @*<label asp-for="CarPrice" class="control-label"></label>*@
+                <label>@Localizer["CarPrice"]</label>
+                <input asp-for="CarPrice" class="form-control" />
+                <span asp-validation-for="CarPrice" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value=@Localizer["CreateButton"] class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn">@Localizer["BackButton"]</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
