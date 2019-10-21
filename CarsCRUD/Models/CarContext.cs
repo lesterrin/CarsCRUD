@@ -12,7 +12,6 @@ namespace CarsCRUD.Models
         {
 
         }
-
         public DbSet<Car> Cars { get; set; } //связывается с базой данных? Содержит возвращаемые из БД значения?
     }
 }
