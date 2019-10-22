@@ -207,29 +207,8 @@ namespace CarsCRUD.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Car car)
         {
-            if (id != car.CarID)
-            {
-                return NotFound();
-            }
-            
-                try
-                {
-                    _carServ.Update(car);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CarExists(car.CarID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                 _carServ.Update(car);
                 return RedirectToAction(nameof(Index));
-            
-            return View(car);
         }
 
         /*

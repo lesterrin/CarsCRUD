@@ -36,17 +36,17 @@ namespace CarsCRUD.Services
         public void AddCar(Car car)
         {
             _context.Add(car);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
         public void Remove(Car car)
         {
             _context.Cars.Remove(car);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
         public void Update(Car car)
         {
             _context.Update(car);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public bool Any(int id)
