@@ -38,18 +38,18 @@ namespace CarsCRUD.Services
             _context.Add(car);
             _context.SaveChanges();
         }
-        public void Remove(Car car)
+        public void RemoveCar(Car car)
         {
             _context.Cars.Remove(car);
             _context.SaveChanges();
         }
-        public void Update(Car car)
+        public void UpdateCar(Car car)
         {
             _context.Update(car);
             _context.SaveChanges();
         }
 
-        public bool Any(int id)
+        public bool AnyCar(int id)
         {
             return _context.Cars.Any(e => e.CarID == id);
         }

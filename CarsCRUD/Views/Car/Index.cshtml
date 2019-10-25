@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<CarsCRUD.Models.Car>
-@using Microsoft.AspNetCore.Mvc.Localization 
+@using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 
 @{
@@ -7,12 +7,27 @@
 
 }
 
+@if (User.Identity.IsAuthenticated)
+{
+    <p>@User.Identity.Name</p>
+
+    <form method="post" asp-controller="Account" asp-action="LogOff">
+        <input type="submit" value="Выход" />
+    </form>
+}
+else
+{
+    <a asp-controller="Account" asp-action="Login">Вход</a>
+    <a asp-controller="Account" asp-action="Register">Регистрация</a>
+}
+
 <h1>@Localizer["Header"]</h1>
+
 <table class="table table-hover">
     <thead>
         <tr>
             <th>
-               <h6>@Localizer["CarName"]</h6>
+                <h6>@Localizer["CarName"]</h6>
             </th>
             <th>
                 <h6>@Localizer["CarDesc"]</h6>

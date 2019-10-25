@@ -10,8 +10,11 @@ namespace CarsCRUD.Models
     {
         public CarContext(DbContextOptions<CarContext> options): base(options) //?Что значат параметры конструктора? Для чего необходим? 
         {
-
+            Database.EnsureCreated();
         }
         public DbSet<Car> Cars { get; set; } //связывается с базой данных? Содержит возвращаемые из БД значения?
+        
+       
+       
     }
 }

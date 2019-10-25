@@ -174,7 +174,7 @@ namespace CarsCRUD.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var car = _carServ.FindCar(id);
-            _carServ.Remove(car);
+            _carServ.RemoveCar(car);
             return RedirectToAction(nameof(Index));
         }
         /*
@@ -192,7 +192,7 @@ namespace CarsCRUD.Controllers
 
         private bool CarExists(int id)
         {
-            return _carServ.Any(id);
+            return _carServ.AnyCar(id);
         }
 
         /*private bool CarExists(int id)
@@ -207,7 +207,7 @@ namespace CarsCRUD.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Car car)
         {
-                 _carServ.Update(car);
+                 _carServ.UpdateCar(car);
                 return RedirectToAction(nameof(Index));
         }
 

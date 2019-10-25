@@ -9,6 +9,7 @@ using CarsCRUD.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -50,6 +51,8 @@ namespace CarsCRUD
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<CarContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"))); ; //?Внедрение завиимостей?;?Экземпляр класса CarContext?;Почитать про лямбда выражения; Определяет подключение к БД
+            services.AddDbContext<ApplicationContext>(options =>options.UseNpgsql(Configuration.GetConnectionString("AccountConnection")));
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,7 +74,7 @@ namespace CarsCRUD
 
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

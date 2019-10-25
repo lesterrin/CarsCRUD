@@ -12,8 +12,8 @@ namespace CarsCRUD.Interfaces
         IEnumerable<Car> GetCar { get; }
         Car FindCar(int id);
         void AddCar(Car car);
-        void Remove(Car car);
-        bool Any(int id);
-        void Update(Car car);
+        void RemoveCar(Car car);
+        bool AnyCar(int id);
+        void UpdateCar(Car car);
     }
 }
