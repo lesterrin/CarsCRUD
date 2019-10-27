@@ -12,13 +12,16 @@ namespace CarsCRUD.Models
     {
         [Key]
         public int CarID { get; set; }
-        [DisplayName("Название машины")]
+        [Display(Name = "Название машины")]
+        [Required(ErrorMessage = "Поле должно быть заполнено")]
         [Column(TypeName ="varchar(50)")]
         public string CarName { get; set; }
-        [DisplayName("Описание")]
+        [Display(Name = "Описание")]
+        [Required(ErrorMessage = "Поле должно быть заполнено")]
         [Column(TypeName = "varchar(250)")]
         public string CarDesc { get; set; }
-        [DisplayName("Цена")]
+        [Display(Name = "Цена")]
+        [Required(ErrorMessage = "Поле должно быть заполнено")]
         public short CarPrice { get; set; }
 
     }

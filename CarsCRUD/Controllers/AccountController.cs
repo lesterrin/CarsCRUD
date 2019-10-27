@@ -4,6 +4,8 @@ using CarsCRUD.ViewModels;
 using CarsCRUD.Models;
 using Microsoft.AspNetCore.Identity;
 using CarsCRUD.ViewModel;
+using CarsCRUD.Migrations.Application;
+using System.Collections;
 
 namespace CarsCRUD.Controllers
 {
@@ -11,17 +13,20 @@ namespace CarsCRUD.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly ApplicationContext _appContext;
 
         public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
         }
+
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -51,7 +56,8 @@ namespace CarsCRUD.Controllers
         {
             return View(new LoginViewModel { ReturnUrl = returnUrl });
         }
-
+        
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)

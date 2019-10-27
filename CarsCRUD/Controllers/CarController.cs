@@ -29,6 +29,8 @@ namespace CarsCRUD.Controllers
             return $"CurrentCulture:{CultureInfo.CurrentCulture.Name}, CurrentUICulture:{CultureInfo.CurrentUICulture.Name}";
         }
 
+        
+
         [HttpPost]
         public IActionResult SetLanguage(string culture, string returnUrl)
         {
@@ -145,11 +147,17 @@ namespace CarsCRUD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create( Car car)
         {
+            if (ModelState.IsValid)
+            {
                 _carServ.AddCar(car);
                 return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View(car);
+            }
         }
         /*
          * // POST: Car/Create
@@ -173,9 +181,17 @@ namespace CarsCRUD.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+
             var car = _carServ.FindCar(id);
-            _carServ.RemoveCar(car);
-            return RedirectToAction(nameof(Index));
+            if (ModelState.IsValid)
+            {
+                _carServ.RemoveCar(car);
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View(car);
+            }
         }
         /*
         // POST: Car/Delete/5
@@ -204,11 +220,14 @@ namespace CarsCRUD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Car car)
-        {
-                 _carServ.UpdateCar(car);
+        {  
+            if (ModelState.IsValid)
+            {
+                _carServ.UpdateCar(car);
                 return RedirectToAction(nameof(Index));
+            }
+            return View(car);
         }
 
         /*
