@@ -13,7 +13,6 @@ namespace CarsCRUD.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly ApplicationContext _appContext;
 
         public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {

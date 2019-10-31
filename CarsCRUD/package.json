@@ -1,0 +1,19 @@
+{
+    "version": "1.0.0",
+    "name": "carscrud",
+    "private": true,
+    "devDependencies": {
+        "webpack": "^2.5.1",
+        "clean-webpack-plugin": "^0.1.16"
+    },
+    "scripts": {
+        "webpack-script": "webpack",
+        "build": "webpack —mode production",
+        "dev": "webpack —mode development —watch"
+    },
+    "-vs-binding": {
+        "BeforeBuild": [
+            "webpack-script"
+        ]
+    }
+}
