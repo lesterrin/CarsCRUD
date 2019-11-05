@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
   </PropertyGroup>
   
   <ItemGroup>
@@ -17,10 +18,11 @@
     <PackageReference Include="Webpack" Version="4.0.0" />
     <PackageReference Include="Webpack.NET" Version="0.0.2.10" />
     <None Remove="npm-debug.log" />
+    <None Remove="Scripts\main.ts" />
   </ItemGroup>
   
   <ItemGroup>
-    <Folder Include="WebPack\" />
+    <TypeScriptCompile Include="Scripts\main.ts" />
   </ItemGroup>
   
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
