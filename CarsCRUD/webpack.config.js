@@ -1,68 +1,53 @@
-﻿"use strict"
-{
-    // Требуется для формирования полного output пути
-    let path = require('path');
+﻿const path = require('path');
 
-    // Плагин для очистки выходной папки (bundle) перед созданием новой
-    const CleanWebpackPlugin = require('clean-webpack-plugin');
+const bundleOutputDir = './wwwroot/bundle';
 
-    // Путь к выходной папке
-    const bundleFolder = "wwwroot/bundle/";
+module.exports = {
+    entry: {
+        'bootstrap': './Scripts/main.ts'
+    },
+    output: {
+        path: path.join(__dirname, bundleOutputDir)
+    },
+    resolve: {
+        extensions: [".tsx", ".ts", ".js"]
+    },
 
-    const ExtractTextPlugin = require("extract-text-webpack-plugin");
-
-    module.exports = {
-        // Точка входа в приложение
-        entry: [
-            "./Scripts/main.ts",
-            './src/scss/style.scss'
-        ],
-
-        // Выходной файл
-        output: {
-            filename: 'script.js',
-            path: path.resolve(__dirname, bundleFolder)
-        },
-        module: {
-            rules: [
-                {
-                    test: /\.(sass|scss)$/,
-                    include: path.resolve(__dirname, 'src/scss'),
-                    use: ExtractTextPlugin.extract({
-                        use: [{
-                            loader: "css-loader",
-                            options: {
-                                sourceMap: true,
-                                minimize: true,
-                                url: false
-                            }
-                        },
-                        {
-                            loader: "sass-loader",
-                            options: {
-                                sourceMap: true
+    module: {
+        rules: [
+            {
+                test: /\.(scss)$/,
+                use: [
+                    {
+                        // Adds CSS to the DOM by injecting a `<style>` tag
+                        loader: 'style-loader'
+                    },
+                    {
+                        // Interprets `@import` and `url()` like `import/require()` and will resolve them
+                        loader: 'css-loader'
+                    },
+                    {
+                        // Loader for webpack to process CSS with PostCSS
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: function () {
+                                return [
+                                    require('autoprefixer')
+                                ];
                             }
                         }
-                        ]
-                    }),
-                    loader: "ts-loader",
-                    exclude: /node_modules/
-                }
-            ]
-        },
-        resolve: {
-            extensions: [".tsx", ".ts", ".js"]
-        },
-        plugins: [
-            new ExtractTextPlugin({
-                filename: './css/style.bundle.css',
-                allChunks: true
-            }),
-            new CleanWebpackPlugin([bundleFolder])
-        ],
-        // Включаем генерацию отладочной информации внутри выходного файла
-        // (Нужно для работы отладки клиентских скриптов)
-        devtool: "inline-source-map"
-
-    };
-}
+                    },
+                    {
+                        // Loads a SASS/SCSS file and compiles it to CSS
+                        loader: 'sass-loader'
+                    }
+                ]
+            },
+            {
+                test: /\.tsx?$/,
+                loader: "awesome-typescript-loader",
+                exclude: /node_modules/
+            }
+        ]
+    }
+};

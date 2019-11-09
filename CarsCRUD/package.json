@@ -10,7 +10,7 @@
         "sass-loader": "^8.0.0",
         "ts-loader": "^2.0.3",
         "typescript": "^2.3.2",
-        "webpack": "^2.5.1",
+        "webpack": "^4.41.2",
         "webpack-cli": "^3.3.9"
     },
     "scripts": {
@@ -19,13 +19,17 @@
         "dev": "webpack -mode development -watch"
     },
     "dependencies": {
+        "awesome-typescript-loader": "^5.2.1",
         "bootstrap": "^4.3.1",
         "jquery": "^3.4.1",
-        "popper.js": "^1.16.0"
+        "popper.js": "^1.16.0",
+        "postcss-loader": "^3.0.0",
+        "style-loader": "^1.0.0"
     },
     "-vs-binding": {
         "BeforeBuild": [
-            "webpack-script"
+            "webpack-script",
+            "update"
         ]
     }
 }
