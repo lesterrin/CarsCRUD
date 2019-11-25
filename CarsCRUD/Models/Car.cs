@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace CarsCRUD.Models
 {
@@ -12,17 +13,17 @@ namespace CarsCRUD.Models
     {
         [Key]
         public int CarID { get; set; }
-        [Display(Name = "Название машины")]
-        [Required(ErrorMessage = "Поле должно быть заполнено")]
+        [Display(Name = "CarName")]
+        [Required(ErrorMessage = "RequiredField")]
         [Column(TypeName ="varchar(50)")]
         public string CarName { get; set; }
-        [Display(Name = "Описание")]
-        [Required(ErrorMessage = "Поле должно быть заполнено")]
+        [Display(Name = "CarDescription")]
+        [Required(ErrorMessage = "RequiredField")]
         [Column(TypeName = "varchar(250)")]
         public string CarDesc { get; set; }
-        [Display(Name = "Цена")]
-        [Required(ErrorMessage = "Поле должно быть заполнено")]
+        [Display(Name = "CarPrice")]
+        [Required(ErrorMessage = "RequiredField")]
         public short CarPrice { get; set; }
-
+        
     }
 }

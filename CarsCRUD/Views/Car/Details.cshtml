@@ -1,30 +1,30 @@
 ﻿@model CarsCRUD.Models.Car
 @using Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
-
+@using CarsCRUD.Services;
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>@Localizer["Header"]</h1>
+<h1>@SharedLocalizer["Header"]</h1>
 
 <div>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            <label>@Localizer["CarName"]</label>
+            <label>@SharedLocalizer["CarName"]</label>
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CarName)
         </dd>
         <dt class="col-sm-2">
-            <label>@Localizer["CarDesc"]</label>
+            <label>@SharedLocalizer["CarDesc"]</label>
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CarDesc)
         </dd>
         <dt class="col-sm-2">
-            <label>@Localizer["CarPrice"]</label>
+            <label>@SharedLocalizer["CarPrice"]</label>
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CarPrice)
@@ -32,7 +32,7 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.CarID" class="btn">@Localizer["EditButton"]</a> |
-    <a asp-action="Delete" asp-route-id="@Model.CarID" class="btn">@Localizer["DeleteButton"]</a> |
-    <a asp-action="Index" class="btn">@Localizer["BackButton"]</a>
+    <a asp-action="Edit" asp-route-id="@Model.CarID" class="btn">@SharedLocalizer["EditButton"]</a> |
+    <a asp-action="Delete" asp-route-id="@Model.CarID" class="btn">@SharedLocalizer["DeleteButton"]</a> |
+    <a asp-action="Index" class="btn">@SharedLocalizer["BackButton"]</a>
 </div>

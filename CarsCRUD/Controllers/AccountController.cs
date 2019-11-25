@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using CarsCRUD.ViewModel;
 using CarsCRUD.Migrations.Application;
 using System.Collections;
+using Microsoft.Extensions.Localization;
+using CarsCRUD.Services;
 
 namespace CarsCRUD.Controllers
 {
@@ -13,11 +15,16 @@ namespace CarsCRUD.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IStringLocalizer<AccountController> _localizer;
+        private readonly IStringLocalizer<SharedResources> _sharedLocalizer;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IStringLocalizer<AccountController> localizer,
+                   IStringLocalizer<SharedResources> sharedLocalizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _localizer = localizer;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         [HttpGet]

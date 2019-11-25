@@ -20,6 +20,6 @@
         "sourceMap": true
     },
 
-    "include": [ "./Scripts/*" ],
+    "include": [ "./Scripts/*", "ViewModels" ],
     "compileOnSave": false
 }

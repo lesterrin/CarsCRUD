@@ -1,28 +1,29 @@
 ﻿@model CarsCRUD.Models.Car
 @using Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@using CarsCRUD.Services;
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @{
     ViewData["Title"] = "Delete";
 }
 
-<h1>@Localizer["Header"]</h1>
+<h1>@SharedLocalizer["Header"]</h1>
 <div>
     <dl class="row">
         <dt class="col-sm-2">
-            <label>@Localizer["CarName"]</label>
+            <label>@SharedLocalizer["CarName"]</label>
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CarName)
         </dd>
         <dt class="col-sm-2">
-            <label>@Localizer["CarDesc"]</label>
+            <label>@SharedLocalizer["CarDesc"]</label>
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CarDesc)
         </dd>
         <dt class="col-sm-2">
-            <label>@Localizer["CarPrice"]</label>
+            <label>@SharedLocalizer["CarPrice"]</label>
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CarPrice)
@@ -31,7 +32,7 @@
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="CarID" />
-        <input type="submit" value="@Localizer["DeleteButton"]" class="btn btn-danger" /> |
-        <a asp-action="Index">@Localizer["BackButton"]</a>
+        <input type="submit" value="@SharedLocalizer["DeleteButton"]" class="btn btn-danger" /> |
+        <a asp-action="Index">@SharedLocalizer["BackButton"]</a>
     </form>
 </div>

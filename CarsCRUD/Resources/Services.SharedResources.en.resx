@@ -118,27 +118,87 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BackButton" xml:space="preserve">
-    <value>Назад</value>
+    <value>Back</value>
     <comment>Кнопка возврата на главную</comment>
   </data>
+  <data name="BirthYear" xml:space="preserve">
+    <value>Year of birth</value>
+    <comment>Название поля</comment>
+  </data>
   <data name="CarDesc" xml:space="preserve">
-    <value>Описание</value>
+    <value>Decription</value>
     <comment>Описание машины</comment>
   </data>
+  <data name="CarDescription" xml:space="preserve">
+    <value>Description</value>
+    <comment>Описание автомобиля</comment>
+  </data>
   <data name="CarName" xml:space="preserve">
-    <value>Название</value>
-    <comment>Название машины</comment>
+    <value>Name</value>
+    <comment>Название автомобиля</comment>
   </data>
   <data name="CarPrice" xml:space="preserve">
-    <value>Цена</value>
-    <comment>Цена</comment>
+    <value>Price</value>
+    <comment>Цена автомобиля</comment>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+    <comment>Название поля</comment>
   </data>
   <data name="CreateButton" xml:space="preserve">
-    <value>Добавить</value>
+    <value>Add</value>
     <comment>Кнопка создания записи</comment>
   </data>
+  <data name="DeleteButton" xml:space="preserve">
+    <value>Delete</value>
+    <comment>Кнопка "Удалить"</comment>
+  </data>
+  <data name="DetButton" xml:space="preserve">
+    <value>Details</value>
+    <comment>Кнопка "Подробнее"</comment>
+  </data>
+  <data name="EditButton" xml:space="preserve">
+    <value>Edit</value>
+    <comment>Кнопка "Редактировать"</comment>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+    <comment>Название поля</comment>
+  </data>
   <data name="Header" xml:space="preserve">
-    <value>Добавить автомобиль</value>
+    <value>Add car</value>
     <comment>Заголовок страницы</comment>
+  </data>
+  <data name="LangList" xml:space="preserve">
+    <value>Language</value>
+    <comment>Выбор языка сайта</comment>
+  </data>
+  <data name="Match" xml:space="preserve">
+    <value>Passwords do not match</value>
+    <comment>Ошибка при вводе пароля, не соответствующего заданному</comment>
+  </data>
+  <data name="MustContainsEmail" xml:space="preserve">
+    <value>Must contains email</value>
+    <comment>Ошибка при вводе некорректной электронной почты</comment>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+    <comment>Название поля</comment>
+  </data>
+  <data name="Remember" xml:space="preserve">
+    <value>Remember me</value>
+    <comment>Название поля</comment>
+  </data>
+  <data name="RequiredField" xml:space="preserve">
+    <value>Must be filled</value>
+    <comment>Ошибка при пустом поле</comment>
+  </data>
+  <data name="SaveButton" xml:space="preserve">
+    <value>Save</value>
+    <comment>Кнопка "Сохранить"</comment>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Index</value>
+    <comment>Название страницы</comment>
   </data>
 </root>

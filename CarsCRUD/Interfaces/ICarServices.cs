@@ -9,11 +9,11 @@ namespace CarsCRUD.Interfaces
 {
     public interface ICarServices
     {
-        IEnumerable<Car> GetCar { get; }
+        List<Car> GetCar();
         Car FindCar(int id);
-        void AddCar(Car car);
-        void RemoveCar(Car car);
+        Task AddCar(Car car);
+        Task RemoveCar(Car car);
         bool AnyCar(int id);
-        void UpdateCar(Car car);
+        Task UpdateCar(Car car);
     }
 }

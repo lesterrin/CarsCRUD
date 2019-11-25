@@ -12,24 +12,29 @@ using Microsoft.Extensions.Localization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Http;
 using CarsCRUD.Interfaces;
+using Microsoft.AspNetCore.Hosting;
 
 namespace CarsCRUD.Controllers
 {
     public class CarController : Controller
     {
-        ICarServices _carServ;
-
-        public CarController(ICarServices iCarServ)
+        private readonly ICarServices _carServ;
+        private readonly IStringLocalizer<CarController> _localizer;
+        private readonly IStringLocalizer<SharedResources> _sharedLocalizer;
+        public CarController(ICarServices iCarServ, IStringLocalizer<CarController> localizer,
+                   IStringLocalizer<SharedResources> sharedLocalizer)
         {
             _carServ = iCarServ;
+            _localizer = localizer;
+            _sharedLocalizer = sharedLocalizer;
         }
-        
+
         public string GetCulture()
         {
             return $"CurrentCulture:{CultureInfo.CurrentCulture.Name}, CurrentUICulture:{CultureInfo.CurrentUICulture.Name}";
         }
 
-        
+
 
         [HttpPost]
         public IActionResult SetLanguage(string culture, string returnUrl)
@@ -43,15 +48,9 @@ namespace CarsCRUD.Controllers
             return LocalRedirect(returnUrl);
         }
 
-        // GET: Car
-        /*public async Task<IActionResult> Index()
-        {
-            return View(await _context.Cars.ToListAsync());
-        }*/
-
         public ViewResult Index()
         {
-            var cars = _carServ.GetCar;
+            var cars = _carServ.GetCar();
             return View(cars);
         }
 
@@ -61,25 +60,7 @@ namespace CarsCRUD.Controllers
             var car = _carServ.FindCar(id);
             return View(car);
         }
-        /*
-        // GET: Car/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var car = await _context.Cars
-                .FirstOrDefaultAsync(m => m.CarID == id);
-            if (car == null)
-            {
-                return NotFound();
-            }
-
-            return View(car);
-        }
-        */
 
         //Get: Car/Create
         public IActionResult Create()
@@ -87,71 +68,31 @@ namespace CarsCRUD.Controllers
             return View(new Car());
         }
 
-
-        /*// GET: Car/Create
-        public IActionResult Create()
-        {
-            return View(new Car());
-        }*/
-
         // GET: Car/Edit/5
         public ViewResult Edit(int id)
         {
             var car = _carServ.FindCar(id);
             return View(car);
         }
-        /*
-        // GET: Car/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var car = await _context.Cars.FindAsync(id);
-            if (car == null)
-            {
-                return NotFound();
-            }
-            return View(car);
-        }*/
 
         // GET: Car/Delete/5
         public ViewResult Delete(int id)
         {
             var car = _carServ.FindCar(id);
-            
+
             return View(car);
         }
-        /*
-        // GET: Car/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var car = await _context.Cars
-                .FirstOrDefaultAsync(m => m.CarID == id);
-            if (car == null)
-            {
-                return NotFound();
-            }
-
-            return View(car);
-        }*/
 
         // POST: Car/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public async Task<IActionResult> Create( Car car)
+        public async Task<IActionResult> Create(Car car)
         {
             if (ModelState.IsValid)
             {
-                _carServ.AddCar(car);
+                await _carServ.AddCar(car);
                 return RedirectToAction(nameof(Index));
             }
             else
@@ -159,22 +100,6 @@ namespace CarsCRUD.Controllers
                 return View(car);
             }
         }
-        /*
-         * // POST: Car/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CarID,CarName,CarDesc,CarPrice")] Car car)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(car);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(car);
-        }*/
 
         // POST: Car/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -182,10 +107,10 @@ namespace CarsCRUD.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
 
-            var car = _carServ.FindCar(id);
+            Car car = _carServ.FindCar(id);
             if (ModelState.IsValid)
             {
-                _carServ.RemoveCar(car);
+                await _carServ.RemoveCar(car);
                 return RedirectToAction(nameof(Index));
             }
             else
@@ -193,79 +118,28 @@ namespace CarsCRUD.Controllers
                 return View(car);
             }
         }
-        /*
-        // POST: Car/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var car = await _context.Cars.FindAsync(id);
-            _context.Cars.Remove(car);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-        */
+
 
         private bool CarExists(int id)
         {
             return _carServ.AnyCar(id);
         }
 
-        /*private bool CarExists(int id)
-        {
-            return _context.Cars.Any(e => e.CarID == id);
-        }*/
 
         // POST: Car/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         public async Task<IActionResult> Edit(int id, Car car)
-        {  
-            if (ModelState.IsValid)
-            {
-                _carServ.UpdateCar(car);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(car);
-        }
-
-        /*
-        // POST: Car/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CarID,CarName,CarDesc,CarPrice")] Car car)
         {
-            if (id != car.CarID)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(car);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CarExists(car.CarID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                await _carServ.UpdateCar(car);
                 return RedirectToAction(nameof(Index));
             }
             return View(car);
         }
-        
-        */
+
+
     }
 }

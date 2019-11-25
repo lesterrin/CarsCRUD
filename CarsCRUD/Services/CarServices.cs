@@ -16,15 +16,12 @@ namespace CarsCRUD.Services
         private readonly CarContext _context;
         public CarServices(CarContext context)
         {
-            this._context = context;
+            _context = context;
         }
-
-        public IEnumerable<Car> GetCar
+        
+        public List<Car> GetCar()
         {
-            get
-            {
-                return _context.Cars.ToList();
-            }
+            return _context.Cars.ToList();
         }
 
 
@@ -33,20 +30,23 @@ namespace CarsCRUD.Services
             return _context.Cars.Find(id);
         }
 
-        public void AddCar(Car car)
+        public async Task AddCar(Car car)
         {
-            _context.Add(car);
-            _context.SaveChanges();
+            await _context.AddAsync(car);
+            await _context.SaveChangesAsync();
         }
-        public void RemoveCar(Car car)
+
+        public async Task RemoveCar(Car car)
         {
-            _context.Cars.Remove(car);
-            _context.SaveChanges();
+            _context.Remove(car);
+            await _context.SaveChangesAsync();
         }
-        public void UpdateCar(Car car)
+
+        public async Task UpdateCar(Car car)
         {
-            _context.Update(car);
-            _context.SaveChanges();
+          _context.Update(car);
+           await _context.SaveChangesAsync();
+                
         }
 
         public bool AnyCar(int id)

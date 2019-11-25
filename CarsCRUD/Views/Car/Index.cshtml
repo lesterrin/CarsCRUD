@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<CarsCRUD.Models.Car>
 @using Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@using CarsCRUD.Services;
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer
 
 @{
     ViewData["Title"] = "Index";
@@ -21,23 +22,23 @@ else
     <a asp-controller="Account" asp-action="Register">Регистрация</a>
 }
 
-<h1>@Localizer["Header"]</h1>
+    <h1>@SharedLocalizer["Header"]</h1>
 
 
 <table class="table table-hover">
     <thead>
         <tr>
             <th>
-                <h6>@Localizer["CarName"]</h6>
+                <h6>@SharedLocalizer["CarName"]</h6>
             </th>
             <th>
-                <h6>@Localizer["CarDesc"]</h6>
+                <h6>@SharedLocalizer["CarDesc"]</h6>
             </th>
             <th>
-                <h6>@Localizer["CarPrice"]</h6>
+                <h6>@SharedLocalizer["CarPrice"]</h6>
             </th>
             <th>
-                <a asp-action="Create" class="btn">@Localizer["CreateButton"]</a>
+                <a asp-action="Create" class="btn">@SharedLocalizer["CreateButton"]</a>
             </th>
         </tr>
     </thead>
@@ -55,7 +56,7 @@ else
                     @Html.DisplayFor(modelItem => item.CarPrice)
                 </td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.CarID" class="btn">@Localizer["DetButton"]</a>
+                    <a asp-action="Details" asp-route-id="@item.CarID" class="btn">@SharedLocalizer["DetButton"]</a>
                 </td>
             </tr>
         }
