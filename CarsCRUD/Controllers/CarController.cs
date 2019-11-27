@@ -48,16 +48,16 @@ namespace CarsCRUD.Controllers
             return LocalRedirect(returnUrl);
         }
 
-        public ViewResult Index()
+        public async Task<IActionResult> Index()
         {
-            var cars = _carServ.GetCar();
+            List<Car> cars = await _carServ.GetCar();
             return View(cars);
         }
 
         // GET: Car/Details/5
-        public ViewResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            var car = _carServ.FindCar(id);
+            Car car = await _carServ.FindCar(id);
             return View(car);
         }
 
@@ -69,21 +69,20 @@ namespace CarsCRUD.Controllers
         }
 
         // GET: Car/Edit/5
-        public ViewResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            var car = _carServ.FindCar(id);
+            Car car =await _carServ.FindCar(id);
             return View(car);
         }
 
         // GET: Car/Delete/5
-        public ViewResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var car = _carServ.FindCar(id);
+            Car car = await _carServ.FindCar(id);
 
             return View(car);
         }
-
-
+        
         // POST: Car/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -107,7 +106,7 @@ namespace CarsCRUD.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
 
-            Car car = _carServ.FindCar(id);
+            Car car = await _carServ.FindCar(id);
             if (ModelState.IsValid)
             {
                 await _carServ.RemoveCar(car);
@@ -120,9 +119,9 @@ namespace CarsCRUD.Controllers
         }
 
 
-        private bool CarExists(int id)
+        private async Task<bool> CarExists(int id)
         {
-            return _carServ.AnyCar(id);
+            return await _carServ.AnyCar(id);
         }
 
 
@@ -130,7 +129,7 @@ namespace CarsCRUD.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, Car car)
+        public async Task<IActionResult> Edit(Car car)
         {
             if (ModelState.IsValid)
             {

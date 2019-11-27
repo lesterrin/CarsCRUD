@@ -19,16 +19,17 @@ namespace CarsCRUD.Services
             _context = context;
         }
         
-        public List<Car> GetCar()
+        public async Task<List<Car>> GetCar()
         {
-            return _context.Cars.ToList();
+            return await _context.Cars.ToListAsync();
         }
 
 
-        public Car FindCar(int id)
+        public async Task<Car> FindCar(int id)
         {
-            return _context.Cars.Find(id);
+            return await _context.Cars.FindAsync(id);
         }
+        
 
         public async Task AddCar(Car car)
         {
@@ -44,14 +45,14 @@ namespace CarsCRUD.Services
 
         public async Task UpdateCar(Car car)
         {
-          _context.Update(car);
+            _context.Update(car);
            await _context.SaveChangesAsync();
                 
         }
 
-        public bool AnyCar(int id)
+        public async Task<bool> AnyCar(int id)
         {
-            return _context.Cars.Any(e => e.CarID == id);
+            return await _context.Cars.AnyAsync(e => e.CarID == id);
         }
     }
 }
