@@ -22,7 +22,7 @@
         ]
     },
     "dependencies": {
-        "jquery": "^3.4.1",
+        "jquery": "^3.5.0",
         "npm": "^6.12.1",
         "postcss-loader": "^3.0.0",
         "runner": "^3.0.0",
