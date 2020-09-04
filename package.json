@@ -6,7 +6,7 @@
         "bootstrap": "^4.3.1",
         "clean-webpack-plugin": "^0.1.16",
         "css-loader": "^3.2.0",
-        "node-sass": "^4.13.0",
+        "node-sass": "^4.13.1",
         "popper.js": "^1.16.0",
         "sass-loader": "^8.0.0",
         "webpack": "^2.7.0"
