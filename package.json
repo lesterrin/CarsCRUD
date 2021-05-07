@@ -27,6 +27,6 @@
         "postcss-loader": "^3.0.0",
         "runner": "^3.0.0",
         "task": "^1.3.2",
-        "underscore": "^1.9.1"
+        "underscore": "^1.12.1"
     }
 }
